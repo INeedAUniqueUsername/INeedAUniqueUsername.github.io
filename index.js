@@ -11,8 +11,11 @@ document
     console.log(event.target.value);
     let newTask = document.createElement('li');
 	newTask.id = 'task_' + (++count);
-    let newTaskContent = event.target.value;
-    
+	newTask.addEventListener('click', function(event) {
+		newTask.outerHTML = '';
+	});
+	let newTaskContent = event.target.value;
+	
     newTask.textContent = newTaskContent;
     
     document.getElementById('todoList').append(newTask);
