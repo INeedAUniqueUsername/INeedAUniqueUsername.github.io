@@ -22,6 +22,7 @@
 				
 				window.requestAnimationFrame(update);
 				
+				let wind = 0;
 				let rain = [];
 				let rainTrail = [];
 				let splash = [];
@@ -54,7 +55,7 @@
 					if(lightning.brightness > 0) {
 						//If not all the segments are visible, then make them fade in one by one
 						if(lightning.progress < lightning.segments.length) {
-							//Lightning takes exactly 1 / 10 second to fade in
+							//Lightning takes exactly 1 / 2 second to fade in
 							lightning.progress += lightning.segments.length / 2;
 							
 							//Draw the background flash
@@ -62,8 +63,6 @@
 							ctx.beginPath();
 							ctx.rect(0, 0, canvas.width, canvas.height);
 							ctx.fill();
-							
-							console.log("lightning fading in");
 							
 							//Draw the segments here
 							for(let i = 0; i < lightning.progress; i++) {
@@ -160,6 +159,7 @@
 							x: Math.random() * canvas.width,
 							y: -(Math.random() * 100 + 100),
 							ySplash: canvas.height - Math.random() * 100,
+							xSpeed: 0,
 							ySpeed: Math.random() * 20 + 10
 						});
 					}
@@ -219,9 +219,32 @@
 						}
 					}
 					
+					//Wind has a chance of accelerating or decelerating (if it's active)
+					if(Math.random() < 0.3) {
+						
+						wind += Math.sign(wind) * Math.random() * 1;
+					} else if(Math.random() < 0.5) {
+						wind -= Math.sign(wind) * Math.random() * 1;
+					} else if(Math.random() < 0.2) {
+						wind += 0.5 - Math.random() * 1;
+					}
+					//console.log("wind: " + wind);
+					
 					rain.forEach(r => {
+						r.x += r.xSpeed;
 						r.y += r.ySpeed;
 						r.ySpeed += 0.25;
+						
+						//Wind blows rain to the side
+						if(Math.sign(wind) === Math.sign(r.xSpeed)) {
+							//Stronger winds accelerate rain, but weaker winds do not slow down rain
+							if(Math.abs(wind) > Math.abs(r.xSpeed)) {
+								r.xSpeed += wind/30;
+							}
+						} else {
+							//Wind in the opposite direction of rain accelerates it
+							r.xSpeed += wind/30;
+						}
 						rainTrail.push({
 							x: r.x,
 							y: r.y,
