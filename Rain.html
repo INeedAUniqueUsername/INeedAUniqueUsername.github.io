@@ -19,19 +19,24 @@
 				let canvas = document.getElementById('canvasBack');
 				let ctx = canvas.getContext('2d');
 
+				
+				window.requestAnimationFrame(update);
+				
 				let rain = [];
 				let rainTrail = [];
 				let splash = [];
 				let walkHeight = canvas.height - 100;
 				let lightposts = [];
-				
 				for(let i = 0; i < 5; i++) {
 					lightposts.push({
 						//x: Math.floor(Math.random() * canvas.width / 16) * 16
 						x: 128 + i * 256
 					})
 				}
-				window.requestAnimationFrame(update)
+				let lightning = {
+					segments: [],
+					brightness: 0,
+				};
 				function update() {
 					canvas.width = window.innerWidth;
 					canvas.height = window.innerHeight;
@@ -42,20 +47,90 @@
 					ctx.fillStyle = "black";
 					ctx.fill();
 					
-					walkHeight = canvas.height - 100;
+					ctx.font = "bold 16px Inconsolata";
+					ctx.textAlign = "center";
 					
-					if(Math.random() < 0.4) {
+					if(lightning.brightness > 0) {
+						ctx.fillStyle = "rgb(255, 255, 255, " + (lightning.brightness * lightning.brightness / 5) + ")";
+						ctx.beginPath();
+						ctx.rect(0, 0, canvas.width, canvas.height);
+						ctx.fill();
+						
+						
+						ctx.fillStyle = "rgb(255, 255, 255, " + lightning.brightness + ")";
+						lightning.brightness -= 0.05 + Math.random() * 0.05;
+						lightning.segments.forEach(s => {
+							ctx.fillText(s.line, s.x, s.y);
+						});
+					} else if(Math.random() < 0.02) {
+						/*
+						let x = Math.random() * canvas.width;
+						for(let y = 0; y < walkHeight; y += 16) {
+							let line = "|";
+							if(Math.random() < 0.2) {
+								x -= 16;
+								line = "/";
+							} else if(Math.random() < 0.2) {
+								x += 16;
+								line = "\"";
+							}
+							
+							lightning.segments.push({
+								x:x,
+								y:y,
+								line:line
+							});
+						}
+						*/
+						lightning.segments = [];
+						let sourcePoints = [{
+							x: Math.random() * canvas.width,
+							y: 0
+						}];
+						lightning.brightness = 1;
+						for(let i = 0; i < sourcePoints.length; i++) {
+							let p = sourcePoints[i];
+							let x = p.x;
+							for(let y = p.y; y < walkHeight; y += 16) {
+							
+								//We have a chance of shifting to the side
+								let line = "|";
+								if(Math.random() < 0.2) {
+									x -= 16;
+									line = "/";
+								} else if(Math.random() < 0.2) {
+									x += 16;
+									line = "\"";
+								}
+								
+								//We have a chance of forking
+								if(Math.random() < 0.04) {
+									sourcePoints.push({
+										x:x,
+										y:y
+									});
+								} else if(Math.random() < 0.04) {
+									//We also have a chance of ending this branch early
+									break;
+								}
+								
+								lightning.segments.push({
+									x:x,
+									y:y,
+									line:line
+								});
+							}
+						}
+					}
+					
+					for(let i = 0; i < Math.random() * 3; i++) {
 						rain.push({
 							x: Math.random() * canvas.width,
 							y: -(Math.random() * 100 + 100),
 							ySplash: canvas.height - Math.random() * 100,
-							ySpeed: 0
+							ySpeed: Math.random() * 20 + 10
 						});
 					}
-					
-					ctx.font = "bold 16px Inconsolata";
-					ctx.fillStyle = "white";
-					ctx.textAlign = "center";
 					
 					let banner = [
 "+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+",
@@ -75,12 +150,32 @@
 "| +----                                                                                                                                                             ----+ |",
 "|                                                                                                                                                                         |",
 "+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+"
-];
+];							
+
+					if(!update.bannerBrightness) {
+						update.bannerBrightness = 1;
+					} else {
+						//Flicker chance
+						if(Math.random() < 0.5) {
+							//Flicker
+							if(Math.random() < 0.6) {
+								//Brightness down
+								update.bannerBrightness -= Math.random() * update.bannerBrightness / (5 + Math.random() * 5);
+								if(update.bannerBrightness < 0.2) {
+									update.bannerBrightness = 0.2;
+								}
+							} else {
+								//Brightness up
+								update.bannerBrightness += Math.random() * (1 - update.bannerBrightness) / (3 + Math.random() * 3);
+							}
+						}
+					}
+					ctx.fillStyle = "rgb(255, 255, 255, " + update.bannerBrightness + ")";
 					for(let i = 0; i < banner.length; i++) {
 						ctx.fillText(banner[i], canvas.width/2, canvas.height/4 + i*12);
 					}
-					
-					
+					walkHeight = canvas.height - 100;
+					ctx.fillStyle = "white";
 					for(let x = 0; x < canvas.width; x += 8) {
 						ctx.fillText("#", x, walkHeight + 16);
 						
@@ -91,8 +186,6 @@
 							ctx.fillText("=", x, y);
 						}
 					}
-					
-					
 					
 					rain.forEach(r => {
 						r.y += r.ySpeed;
@@ -131,6 +224,9 @@
 						let remove = r.ySpeed < 0.05;
 						return !remove;
 					});
+					
+					
+					
 					drawLights();
 					
 					window.requestAnimationFrame(update);
