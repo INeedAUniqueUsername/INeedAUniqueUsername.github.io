@@ -34,8 +34,9 @@
 					})
 				}
 				let lightning = {
-					segments: [],
-					brightness: 0,
+					progress: 0,			//Number of segments that are visible
+					segments: [],		//Number of segments in the whole structure
+					brightness: 0,		//Brightness of the entire structure (if we are fully visible)
 				};
 				function update() {
 					canvas.width = window.innerWidth;
@@ -51,17 +52,47 @@
 					ctx.textAlign = "center";
 					
 					if(lightning.brightness > 0) {
-						ctx.fillStyle = "rgb(255, 255, 255, " + (lightning.brightness * lightning.brightness / 5) + ")";
-						ctx.beginPath();
-						ctx.rect(0, 0, canvas.width, canvas.height);
-						ctx.fill();
-						
-						
-						ctx.fillStyle = "rgb(255, 255, 255, " + lightning.brightness + ")";
-						lightning.brightness -= 0.05 + Math.random() * 0.05;
-						lightning.segments.forEach(s => {
-							ctx.fillText(s.line, s.x, s.y);
-						});
+						//If not all the segments are visible, then make them fade in one by one
+						if(lightning.progress < lightning.segments.length) {
+							//Lightning takes exactly 1 / 10 second to fade in
+							lightning.progress += lightning.segments.length / 2;
+							
+							//Draw the background flash
+							ctx.fillStyle = "rgb(255, 255, 255, " + ((lightning.progress / lightning.segments.length) / 4) + ")";
+							ctx.beginPath();
+							ctx.rect(0, 0, canvas.width, canvas.height);
+							ctx.fill();
+							
+							console.log("lightning fading in");
+							
+							//Draw the segments here
+							for(let i = 0; i < lightning.progress; i++) {
+								//Older segments are brighter
+								let brightness = 1 - i / lightning.progress;
+								ctx.fillStyle = "rgb(255, 255, 255, " + brightness + ")";
+								let segment = lightning.segments[i];
+								if(!segment) {
+									break;
+								}
+								ctx.fillText(segment.line, segment.x, segment.y);
+							}
+							
+						} else {
+							//Otherwise, we are fading out
+							
+							//Draw the background flash
+							ctx.fillStyle = "rgb(255, 255, 255, " + (lightning.brightness * lightning.brightness / 4) + ")";
+							ctx.beginPath();
+							ctx.rect(0, 0, canvas.width, canvas.height);
+							ctx.fill();
+							
+							//Draw the lines
+							ctx.fillStyle = "rgb(255, 255, 255, " + lightning.brightness + ")";
+							lightning.brightness -= 0.05 + Math.random() * 0.05;
+							lightning.segments.forEach(s => {
+								ctx.fillText(s.line, s.x, s.y);
+							});
+						}
 					} else if(Math.random() < 0.02) {
 						/*
 						let x = Math.random() * canvas.width;
@@ -83,6 +114,7 @@
 						}
 						*/
 						lightning.segments = [];
+						lightning.progress = 0;
 						let sourcePoints = [{
 							x: Math.random() * canvas.width,
 							y: 0
