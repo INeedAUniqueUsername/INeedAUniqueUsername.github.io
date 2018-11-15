@@ -31,7 +31,9 @@
 				for(let i = 0; i < 5; i++) {
 					lightposts.push({
 						//x: Math.floor(Math.random() * canvas.width / 16) * 16
-						x: 128 + i * 256
+						x: 128 + i * 256,
+						rangeAverage: 3,
+						range: 3 + Math.random()
 					})
 				}
 				let lightning = {
@@ -55,7 +57,7 @@
 					if(lightning.brightness > 0) {
 						//If not all the segments are visible, then make them fade in one by one
 						if(lightning.progress < lightning.segments.length) {
-							//Lightning takes exactly 1 / 2 second to fade in
+							//Lightning takes exactly 1 / 15 second to fade in
 							lightning.progress += lightning.segments.length / 2;
 							
 							//Draw the background flash
@@ -80,7 +82,7 @@
 							//Otherwise, we are fading out
 							
 							//Draw the background flash
-							ctx.fillStyle = "rgb(255, 255, 255, " + (lightning.brightness * lightning.brightness / 4) + ")";
+							ctx.fillStyle = "rgb(255, 255, 255, " + (lightning.brightness * lightning.brightness / 2) + ")";
 							ctx.beginPath();
 							ctx.rect(0, 0, canvas.width, canvas.height);
 							ctx.fill();
@@ -342,14 +344,21 @@
 					*/
 					let lightSources = [];
 					lightposts.forEach(l => {
+						if(Math.random() < 0.3) {
+							//Chance of increasing or decreasing further from the average
+							l.range += Math.sign(l.range - l.rangeAverage) * Math.random() / 10;
+						} else if(Math.random() < 0.5) {
+							l.range -= Math.sign(l.range - l.rangeAverage) * Math.random() / 10;
+						}
 						lightSources.push({
 							x: l.x,
 							y: lightHeight,
-							range: 3
+							range: l.range
 						});
 					});
 					lightSources.forEach(s => {
-						let maxRange = s.range * 4;
+						let maxRange = Math.floor(s.range) * 4;
+						
 						for(let xOffset = -maxRange; xOffset < maxRange; xOffset++) {
 							for(let yOffset = -maxRange; yOffset < maxRange; yOffset++) {
 								let x = s.x + xOffset * 16;
