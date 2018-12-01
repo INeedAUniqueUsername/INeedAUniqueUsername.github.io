@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>
+			* { margin:0; padding:0; }
+			html, body { width:100%; height:100%; }
+			canvas { border: 0px solid black; display:block; }
+		</style>
+	</head>
+	<body>
+		<div style="display:none;">
+		  <img id="banner" src="INeedAUniqueBanner.png"
+			   width="1368" height="280">
+		</div>
+		<canvas	id='canvasBack'	width='100%'	height='100%'></canvas>
+		<script type="text/javascript">
+			
+				let canvas = document.getElementById('canvasBack');
+				let ctx = canvas.getContext('2d');
+
+				let rain = [];
+				let rainTrail = [];
+				let splash = [];
+				let walkHeight = canvas.height - 100;
+				let lightposts = [];
+				
+				for(let i = 0; i < 5; i++) {
+					lightposts.push({
+						//x: Math.floor(Math.random() * canvas.width / 16) * 16
+						x: 128 + i * 256
+					})
+				}
+				window.requestAnimationFrame(update)
+				function update() {
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerHeight;
+					
+					//	Fill background
+					ctx.beginPath();
+					ctx.rect(0, 0, canvas.width, canvas.height);
+					ctx.fillStyle = "black";
+					ctx.fill();
+					
+					walkHeight = canvas.height - 100;
+					
+					if(Math.random() < 0.4) {
+						rain.push({
+							x: Math.random() * canvas.width,
+							y: -(Math.random() * 100 + 100),
+							ySplash: canvas.height - Math.random() * 100,
+							ySpeed: 0
+						});
+					}
+					
+					ctx.font = "bold 16px Inconsolata";
+					ctx.fillStyle = "white";
+					ctx.textAlign = "center";
+					
+					let banner = [
+"+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+",
+"|                                                                                                                                                                         |",
+"| +----                                                                                                                                                             ----+ |",
+"| |                                                                                                                                                                     | |",
+"| | +-----------------------------------------------------------------------------------------------------------------------------------------------------------------+ | |",
+"  | |                                                                                                                                                                 | |  ",
+"  | | ======= ==    = ======= ======= ====     =====  =     = ==    = =======  =====  =     = ======= =     =  ====== ======= ======  ==    =  =====  ==   == ======= | |  ",
+"  |      =    = =   = =       =       =   ==  =     = =     = = =   =    =    =     = =     = =       =     = =       =       =     = = =   = =     = = = = = =         |  ",
+"  |      =    =  =  = ======= ======= =     = ======= =     = =  =  =    =    =     = =     = ======= =     =  =====  ======= ======  =  =  = ======= =  =  = =======   |  ",
+"  |      =    =   = = =       =       =   ==  =     =  =   =  =   = =    =     =    =  =   =  =        =   =        = =       =   =   =   = = =     = =     = =         |  ",
+"  | | ======= =    == ======= ======= ====    =     =   ===   =    == ======= = ====    ===   =======   ===   ======  ======= =    =  =    == =     = =     = ======= | |  ",
+"  | |                                                                                                                                                                 | |  ",
+"| | +-----------------------------------------------------------------------------------------------------------------------------------------------------------------+ | |",
+"| |                                                                                                                                                                     | |",
+"| +----                                                                                                                                                             ----+ |",
+"|                                                                                                                                                                         |",
+"+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+"
+];
+					for(let i = 0; i < banner.length; i++) {
+						ctx.fillText(banner[i], canvas.width/2, canvas.height/4 + i*12);
+					}
+					
+					
+					for(let x = 0; x < canvas.width; x += 8) {
+						ctx.fillText("#", x, walkHeight + 16);
+						
+					}
+					ctx.fillStyle = "gray";
+					for(let x = 0; x < canvas.width; x += 8) {
+						for(let y = walkHeight + 32; y < canvas.height; y += 16) {
+							ctx.fillText("=", x, y);
+						}
+					}
+					
+					
+					
+					rain.forEach(r => {
+						r.y += r.ySpeed;
+						r.ySpeed += 0.25;
+						rainTrail.push({
+							x: r.x,
+							y: r.y,
+							opacity: 1
+						})
+						ctx.fillText("1", r.x, r.y);
+						});
+					rain = rain.filter(r => {
+						let remove = r.y > r.ySplash;
+						if(remove) {
+							r.ySpeed /= 6;
+							splash.push(r);
+							
+						}
+						return !remove;
+					});
+					
+					rainTrail = rainTrail.filter(t => {
+						t.opacity -= 0.1;
+						ctx.fillStyle = "rgba(204, 204, 255, " + t.opacity + ")";
+						ctx.fillText("1", t.x, t.y);
+						return t.opacity > 0;
+					});
+					
+					splash.forEach(r => {
+						r.y -= r.ySpeed;
+						r.ySpeed -= 0.2;
+						ctx.fillStyle = "rgba(204, 204, 255, " + r.ySpeed/3 + ")";
+						ctx.fillText("0", r.x, r.y);
+						});
+					splash = splash.filter(r => {
+						let remove = r.ySpeed < 0.05;
+						return !remove;
+					});
+					drawLights();
+					
+					window.requestAnimationFrame(update);
+				}
+				
+				function drawLights() {
+				
+					let yDisplacement = 8;
+					let segments = 6;
+					let segmentHeight = 12;
+					let lightHeight = walkHeight - segmentHeight * segments + yDisplacement - 6;
+					/*
+					//JavaScript is a joke because it doesn't have proper data structures
+					if(typeof(drawLights.lightmap) != "undefined") {
+						Object.keys(drawLights.lightmap).forEach(point => {
+							
+							let pair = point.split(" ");
+							let x = parseInt(point[0]);
+							let y = parseInt(point[1]);
+							
+							console.log(x + " " + y + " " + drawLights.lightmap[point]);
+							
+							
+							ctx.beginPath();
+							ctx.rect(x - 8, y - 8, 16, 16);
+							ctx.fillStyle = "rgb(204, 204, 204, " + parseFloat(drawLights.lightmap[point]) + ")";
+							ctx.fill();
+						});
+					} else {
+						drawLights.lightmap = {};
+						let lightSources = [];
+						lightposts.forEach(l => {
+							lightSources.push({
+								x: l.x,
+								y: lightHeight,
+								range: 4
+							});
+						});
+						lightSources.forEach(s => {
+							let range = s.range;
+							for(let xOffset = -range*2; xOffset < range*2; xOffset++) {
+								for(let yOffset = -range*2; yOffset < range*2; yOffset++) {
+									let x = s.x + xOffset * 16;
+									let y = s.y + yOffset * 16;
+									let distance = Math.sqrt(xOffset*xOffset + yOffset*yOffset);
+									
+									if(distance == 0) {
+										continue;
+									}
+									let opacity = s.range / (distance * distance);
+									
+									let point = "" + x + " " + y;
+									drawLights.lightmap[point] = (drawLights.lightmap[point] || 0) + opacity;
+								}
+							}
+						});
+					}
+					*/
+					let lightSources = [];
+					lightposts.forEach(l => {
+						lightSources.push({
+							x: l.x,
+							y: lightHeight,
+							range: 3
+						});
+					});
+					lightSources.forEach(s => {
+						let maxRange = s.range * 4;
+						for(let xOffset = -maxRange; xOffset < maxRange; xOffset++) {
+							for(let yOffset = -maxRange; yOffset < maxRange; yOffset++) {
+								let x = s.x + xOffset * 16;
+								let y = s.y + yOffset * 16;
+								let distance = Math.sqrt(xOffset*xOffset + yOffset*yOffset);
+								
+								
+								
+								if(distance == 0) {
+									ctx.beginPath();
+									ctx.rect(x - 8, y - 8, 16, 16);
+									ctx.fillStyle = "rgb(204, 204, 204, 1)";
+									ctx.fill();
+									continue;
+								}
+								
+								let opacity = s.range / (distance * distance);
+								if(opacity < 0.05) {
+									continue;
+								}
+								
+								
+								ctx.beginPath();
+								ctx.rect(x - 8, y - 8, 16, 16);
+								ctx.fillStyle = "rgb(204, 204, 204, " + opacity + ")";
+								ctx.fill();
+							}
+						}
+					});
+					lightposts.forEach(l => {
+						ctx.font = "bold 16px Inconsolata";
+						ctx.fillStyle = "black";
+						ctx.textAlign = "center";
+						for(let i = 0; i < segments; i++) {
+							ctx.fillText("=", l.x, walkHeight - segmentHeight * i + yDisplacement);
+							ctx.fillText("I", l.x, walkHeight - segmentHeight * i + yDisplacement);
+						}
+						ctx.fillText("Y", l.x, lightHeight + 6);
+						ctx.fillText("---", l.x, lightHeight - 6);
+						
+						ctx.font = "bold 20px Inconsolata";
+						ctx.fillStyle = "yellow";
+						ctx.fillText("*", l.x, lightHeight);
+					});
+				}
+			
+		</script>
+	</body>
+</html>

@@ -2,7 +2,7 @@ window.onError = function() {
 	Error("Error");
 };
 
-playerInput.addEventListener('keydown', function() {
+playerInput.addEventListener('keydown', function(event) {
     console.log('Pressed Key');
 	switch(event.keyCode || event.which) {
 		case keys.enter: {
@@ -16,9 +16,8 @@ playerInput.addEventListener('keydown', function() {
 				t.textContent = '# ' + text;
 				playerLog.append(t);
 				*/
-				player.announce("### You: " + text);
+				player.announce('[You: ' + text + ']');
 				player.act(text);
-				playerLog.append(document.createElement('hr'));
 				scroll();
 				playerInput.value = '';
 				playerInputHistoryIndex = null;
