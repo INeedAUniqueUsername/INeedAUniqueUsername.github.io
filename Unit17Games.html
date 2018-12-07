@@ -1,24 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html class="fullscreen">
 	<head>
 		<title></title>
 		<style>
 			* { margin:0; padding:0; }
-			html, body { width:100%; height:100%; }
 			
+			.fullscreen {
+				width:100%;
+				height:100%;
+			}
+			.entry {
+				text-align:center;
+				width:1500px;
+				padding-top:64px;
+			}
+			.leftEntry {
+				border: 16px solid darkblue;
+				border-right: 8px dashed darkblue;
+			}
+			.middleEntry {
+				border: 16px solid darkblue;
+				border-left: 8px dashed darkblue;
+				border-right: 8px dashed darkblue;
+			}
+			.rightEntry {
+				border: 16px solid darkblue;
+				border-left: 8px dashed darkblue;
+			}
+			
+			.entryDescBox {
+				font-family:Inconsolata;
+				color:darkblue;
+			}
+			.entryDescHeader {
+				font-size:48px;
+				padding-bottom:16px;
+			}
+			.entryDescText {
+				font-size:36px;
+				padding-bottom:48px;
+			}
 		</style>
 	</head>
-	<body>
+	<body class="fullscreen">
 		<!--<div style="background-color:#42d7f4">-->
 		<div style="background-color:#41a0e0; height:100%; display:inline-flex;">
 			<!--	Page 1	-->
-			<div id="Page1" style="text-align:center; width:1480px; padding-top:64px; border: 16px solid darkblue; border-right: 8px dashed darkblue;">
+			<div id="Page1" class="entry leftEntry">
 				<img src="Unit%2017%20Games.svg" height="270px" style="padding-bottom:64px;"/>
-				<b style="font-family:Inconsolata; color:darkblue;">
-					<p style="font-size:48px; padding-bottom:16px;">Unit 17 Games</p>
-					<p style="font-size:36px; padding-bottom:48px">
+				<b class="entryDescBox">
+					<p class="entryDescHeader">Unit 17 Games</p>
+					<p class="entryDescText">
 						The creators of Earth's Last Stand, Jake, <br>
-						and Super Nostalgia Entertainment Syndrome.
+						and Super Nostalgia Entertainment Syndrome. <br>
+						We strive to make the games we want to play.
 					</p>
 				</b>
 				
@@ -27,15 +62,15 @@
 			
 			
 			<!--	Page 2	-->
-			<div id="Page2" style="text-align:center; width:1480px; padding-top:64px; border: 16px solid darkblue; border-left: 8px dashed darkblue; border-right: 8px dashed darkblue;">
+			<div id="Page2" class="entry middleEntry">
 				<div style="padding-bottom:64px;">
 					<img src="Courier.svg" height="270px"/>
 					<img src="Drone.svg" height="270px"/>
 				</div>
 
-				<b style="font-family:Inconsolata; color:darkblue;">
-					<p style="font-size:48px; padding-bottom:16px;">Earth's Last Stand</p>
-					<p style="font-size:36px; padding-bottom:48px">
+				<b class="entryDescBox">
+					<p class="entryDescHeader">Earth's Last Stand</p>
+					<p class="entryDescText">
 						Destroy the alien drones and hold back the invasion of <br>
 						Earth as the last surviving ship of the Earth Force!
 					</p>
@@ -43,12 +78,12 @@
 				</b>
 			</div>
 			<!--	Page 3	-->
-			<div id="Page3" style="text-align:center; width:1480px; padding-top:64px; border: 16px solid darkblue; border-left: 8px dashed darkblue; border-right: 8px dashed darkblue;">
+			<div id="Page3" class="entry middleEntry">
 				<img src="Jake.svg" height="270px" style="padding-bottom:64px"/>
 
-				<b style="font-family:Inconsolata; color:darkblue;">
-					<p style="font-size:48px; padding-bottom:16px">Jake</p>
-					<p style="font-size:36px; padding-bottom:48px">
+				<b class="entryDescBox">
+					<p class="entryDescHeader">Jake</p>
+					<p class="entryDescText">
 						Run for food, tunnel away from poisonous enemy snakes, <br>
 						and survive as a lost pet snake in the deadly Snake Arena!
 					</p>
@@ -57,16 +92,16 @@
 			</div>
 			
 			<!--	Page 4	-->
-			<div id="Page4" style="text-align:center; width:1480px; padding-top:64px; border: 16px solid darkblue; border-left: 8px dashed darkblue;">
+			<div id="Page4" class="entry rightEntry">
 				<div style="padding-bottom:64px;">
 					<img src="Lightspeed.svg" height="270px" style="padding-right:128px" />
 					<img src="LightspeedEnemy.svg" height="270px"/>
 				</div>
 
 
-				<b style="font-family:Inconsolata; color:darkblue;">
-					<p style="font-size:48px; padding-bottom:16px;">Super Nostalgia Entertainment Syndrome</p>
-					<p style="font-size:36px; padding-bottom:48px">
+				<b class="entryDescBox">
+					<p class="entryDescHeader">Super Nostalgia Entertainment Syndrome</p>
+					<p class="entryDescText">
 						Fire lasers, leave plasma trails, and avoid deadly <br>
 						collisions with mysterious enemies! You must survive <br>
 						as long as you can in the anomalous Zone of No Escape!
@@ -74,6 +109,68 @@
 					<a style="font-size:36px;" href="https://github.com/INeedAUniqueUsername/Super-Nostalgia-Entertainment-Syndrome/releases">Download</a>
 				</b>
 			</div>
+			
+			<!--	Page 5	-->
+			<div id="Page5" class="entry rightEntry">
+				<div style="padding-bottom:64px;">
+					<img src="SN64_Floodlight.svg" height="270px" style="padding-right:128px" />
+					<img src="SN64_Greenhorn.svg" height="270px"/>
+				</div>
+
+
+				<b class="entryDescBox">
+					<p class="entryDescHeader">Super Nostalgia 64</p>
+					<p class="entryDescText">
+						Reunite (or dominate) the Four Segments of<br>
+						galactic humanity before a deadly war leaves them<br>
+						too weak to defend against a mysterious villain.
+					</p>
+					<a style="font-size:36px;">In The Far, Far Future</a>
+				</b>
+			</div>
 		</div>
+		<script type="text/javascript">
+			{
+				//Do not use
+				return;
+				
+				const entries = [
+					document.getElementById("Page1"),
+					document.getElementById("Page2"),
+					document.getElementById("Page3"),
+					document.getElementById("Page4")
+				];
+				let tick = 0;
+				const entryInterval = 2;
+				
+				entries.forEach(e => e.style.opacity = 0);
+				function update() {
+					tick += 1.0 / 30;
+					let entryIndex = Math.floor(tick / entryInterval);
+					
+					if(entryIndex < entries.length) {
+						let opacity = tick - entryIndex * entryInterval;
+						entries[entryIndex].style.opacity = opacity;
+						
+						window.requestAnimationFrame(update);
+					} else {
+						entries.forEach(e => e.style.opacity = 1);
+					}
+				};
+				
+				function begin() {
+					tick += 1.0 / 30;
+					if(tick < 2) {
+						window.requestAnimationFrame(begin);
+					} else {
+						tick = 0;
+						window.requestAnimationFrame(update);
+					}
+					
+				}
+				window.requestAnimationFrame(begin);
+				
+			}
+		</script>
 	</body>
 </html>
