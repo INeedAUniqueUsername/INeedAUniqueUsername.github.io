@@ -33,9 +33,9 @@
                         let input = document.getElementById("input")
                         if(event.key === "Enter") {
                             Handle(input.value)
+                            scrollIndex = Math.max(0, lines.length - lineCount);
                             UpdateLines();
                             input.value = "";
-                            scrollIndex = Math.max(0, lines.length - lineCount);
                         }
                     }
 
