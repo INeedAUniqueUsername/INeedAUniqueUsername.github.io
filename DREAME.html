@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DREAME.txt - INeedAUniqueUsername Simulator</title>
+        <link rel="stylesheet" type="text/css" href="index.css">
+	</head>
+	<body onkeydown="Press()">
+		<p class="title"><b>DREAME.txt</b></p>
+	</body>
+    <script>
+        let paragraphIndex = 0
+        let visibleParagraphs = []
+        function Scroll(paragraph) {
+            let element = document.createElement("p")
+            element.setAttribute("class", "standard")
+            document.body.appendChild(element)
+            visibleParagraphs.push(paragraph)
+            
+            paragraph.textIndex = 0
+            paragraph.speedUp = false
+            let content = paragraph.content
+            if(paragraph.keyhandler) {
+                keyhandler = paragraph.keyhandler
+            }
+            function Update() {
+                if(paragraph.textIndex < content.length) {
+                    if(content[paragraph.textIndex] === "<") {
+                        paragraph.textIndex++;
+                        while(content[paragraph.textIndex] !== ">") {
+                            paragraph.textIndex++;
+                        }
+                    }
+                    paragraph.textIndex++;
+                    element.innerHTML = content.substr(0, paragraph.textIndex)
+                    
+                    let interval = 60
+                    if(paragraph.speedUp) {
+                        interval = 10
+                    }
+                    setTimeout(Update, interval)
+                } else {
+                    paragraph.done = true
+                    Scroll(paragraphs[paragraph.next])
+                }
+            }
+            setTimeout(Update, 60)
+        }
+        
+        paragraphs = {
+            start: {
+                content: "DREAME - Dynamic Retrospections, Extrapolations And Mind Explorations",
+                next: "introduction"
+            },
+            introduction: {
+                content:
+`Also known as \"Choose Your Own Soliloquy.\" DREAME.txt will be my new interactive blog
+and autobiography. This is where I will write down personal monologues that you might
+hear from me if I'm feeling particularly reflective during a conversation. In between
+long passages, you will be presented with choices - questions that you ask me to steer
+the course of the monologue. I've heard that I should journal more often, but I find
+that it utterly lacks interaction - it's like you're talking to a wall. I only have
+so much to say before I cover everything that I immediately feel like talking about,
+and when I run out of things to say about this particular topic, then what?`,
+                next: "link"
+            },
+            link: {
+                content: `<a href="https://github.com/INeedAUniqueUsername/INeedAUniqueUsername.github.io/issues/1" class="standard" target="_blank">Please submit monologue topics here.</a>`,
+                nextLambda: () => { }
+            }
+        }
+        Scroll(paragraphs.start)
+        document.addEventListener("keydown", Press)
+        let keyhandler = null
+        function Press(event) {
+            if(keyhandler && keyhandler(event)) {
+                return
+            } else if(event && event.key === "Enter") {
+                let current = visibleParagraphs[visibleParagraphs.length - 1]
+                if(!current.speedUp) {
+                    current.speedUp = true
+                } else if(current.done) {
+                    if(current.next) {
+                        Scroll(paragraphs[current.next])
+                        
+                    } else if(current.nextLambda) {
+                        current.nextLambda()
+                    }
+                }
+            }
+        }
+    </script>
+</html>
