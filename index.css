@@ -1,0 +1,21 @@
+body {
+    background-color: rgb(40, 40, 60);
+}
+
+.title {
+    font-family: "IBM Plex Mono";
+    font-size: 2em;
+    font-variant: small-caps;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: rgb(225, 225, 255)
+
+}
+.standard {
+    font-family: "IBM Plex Mono";
+    font-size: 1em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: rgb(225, 255, 225);
+    white-space: pre;
+}
