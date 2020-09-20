@@ -2,200 +2,93 @@
 <html>
 	<head>
 		<title>Desktop - INeedAUniqueUsername Simulator</title>
-        <link rel="stylesheet" type="text/css" href="index.css">
 		<style>
-            #commander {
-                width: 100%;
-                display: flex;
+            body {
+                background-color: rgb(0, 0, 0);
             }
-            #dir {
-                background-color: rgb(20, 20, 40);
+            .title {
+                font-family: "IBM Plex Mono";
+                font-size: 2em;
+                font-variant: small-caps;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                color: rgb(225, 225, 255);
+                text-align: center;
             }
-            #input {
-                flex: 100 0 auto;
-                border: none;
+            .standard {
+                font-family: "IBM Plex Mono";
+                font-size: 1.5em;
+                margin-top: 0px;
+                margin-bottom: 0px;
                 color: rgb(225, 255, 225);
-                background-color: rgb(20, 20, 40);
-                caret-color: rgb(225, 255, 225);
+
+                word-break:break-all
             }
-            
+
+            .gamelink {
+                font-family: "IBM Plex Mono";
+                font-size: 1em;
+
+                margin-left: 8px;
+                margin-right: 8px;
+                background-color: rgb(0, 75, 51);
+
+                white-space:nowrap;
+            }
+
+            .gamelink:hover {
+                color: rgb(255, 153, 51);
+            }
+
+            .gameseparator {
+                font-family: "IBM Plex Mono";
+                font-size: 1em;
+
+                background-color: rgb(0, 51, 51);
+            }
         </style>
 	</head>
 	<body>
-		<p class="title"><b>INeedAUniqueUsername Simulator</b></p>
-        <p class="standard" id="console">
-        </p>
-        <div id="commander">
-            <p id="dir" class="standard"></p>
-            <input type="text" class="standard input" onkeydown="Pressed(this)" autofocus="true" id="input">
-                <script type="text/javascript">
-                    function Pressed() {
-                        let input = document.getElementById("input")
-                        if(event.key === "Enter") {
-                            Handle(input.value)
-                            scrollIndex = Math.max(0, lines.length - lineCount);
-                            UpdateLines();
-                            input.value = "";
+        <img src="INeedAUniqueBanner.png" width="100%" />
+        <div style="background-color: rgb(51, 0, 153);">
+            <hr />
+            <div style="background-color: rgb(0, 0, 51);">
+                <div class="title" style="margin-left: 16px; margin-right: 16px;">
+                    <script type="text/javascript">
+                        function jumpTo(sectionNumber) {
+                            document.getElementById('section-' + sectionNumber).scrollTo();
                         }
-                    }
 
-                    let path = ["C:", "Users", "Guest", "Desktop"]
-                    let tree = {
-                        "C:": {
-                            "Users": {
-                                "Guest": {
-                                    "Desktop": {
-                                        /*
-                                        "DREAME.txt": () => document.location.href = document.location.href.substr(0, document.location.href.lastIndexOf('/'))+"/DREAME.txt",
-                                        */
-                                        "TorrentialRain.txt": () => {
-                                            document.location.href = "TorrentialRain.html"
-                                        },
-                                        "DREAME.txt": () => {
-                                            document.location.href = "DREAME.html"
-                                        },
-                                        source: {
-                                            "Transgenesis.txt": () => {}
-                                        },
-                                        RainAndLightning: {
-                                            
-                                        },
-                                        "Unit17Games.pdf": () => {
-                                            document.location.href = "Unit17Games.html"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    function GetPath() { return path.join('\\') + ">" }
-                    function UpdatePath() {
-                        document.getElementById("dir").innerHTML = GetPath();
-                    }
-                    UpdatePath()
-                </script>
-            </input>
+                    </script>
+                    <a class="gamelink" onclick="jumpTo(1)">[Home]</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[Transcendence Mods]</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[Transgenesis II]</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[TranscendenceRL]</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[Super Nostalgia Entertainment Syndrome]</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[X to the Y to the Z]</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[LC-Sharp</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[Quipcord]</a>
+                    <span class="gameseparator">||</span>
+                    <a class="gamelink">[The Mind Electronic]</a>
+
+                </div>
+            </div>
+            <hr />
         </div>
-        <script type="text/javascript">
-            let scrollIndex = 0;
-            let lineCount = 24;
-            let lines = [
-                "INeedAUniqueUsername Simulator v1.0",
-                "(C) INeedAUniqueUsername Machinations, 1998-2020"
-            ];
-            function UpdateLines() {
-                let visible = lines.slice(scrollIndex, scrollIndex + lineCount)
-                /*
-                while(visible.length < lineCount) {
-                    visible.push("");
-                }
-                */
-                document.getElementById("console").innerHTML = visible.join("<br>");
-            }
-            UpdateLines()
-            function GetCwd() {
-                let cwd = tree
-                path.forEach(dir => cwd = cwd[dir])
-                return cwd;
-            }
-            let unhandled = 0
-            function Handle(command) {
-                let commands = {
-                    cat: str => {
-                        let cwd = GetCwd()
-                        let sub = cwd[str]
-                        if(sub && sub instanceof Function) {
-                            sub()
-                        } else {
-                            lines.push("Unknown file: " + str)
-                        }
-                    },
-                    cd: str => {
-                        if(str === "..") {
-                            if(path.length > 4) {
-                                path.pop()
-                            } else {
-                                lines.push("Access denied")
-                            }
-                        } else {
-                            let cwd = GetCwd()
-                            let sub = cwd[str]
-                            if(sub && sub instanceof Object && !(sub instanceof Function)) {
-                                path.push(str);
-                            } else {
-                                lines.push("Unknown directory " + str)
-                            }
-                        }
-                    },
-                    ls: str => {
-                        let line = ""
-                        let items = Object.keys(GetCwd())
-                        items.unshift("..")
-                        items.forEach(sub => {
-                            let str = sub.padEnd((1 + parseInt(sub.length / 16)) * 16)
-                            
-                            
-                            if(line.length + str.length < 80) {
-                                line += str
-                            } else {
-                                lines.push(line)
-                                line = str
-                            }
-                        })
-                        if(line.length > 0) {
-                            lines.push(line)
-                        }
-                    },
-                    help: str => {
-                        lines.push(
-                            "cat <filename>: View the contents of a file in the current working directory",
-                            "cd <directory>: Change the current working directory",
-                            "ls: List all files and subdirectories in the current working directory",
-                            "help: View this help text",
-                            "navigate: View direct links to all the pages on this website"
-                        )
-                    },
-                    navigate: str => {
-                        lines.push(
-                            "All pages on this website:",
-                            `<a href="TorrentialRain.html" class="standard" target="_blank">Torrential Rain (animated page)</a>`,
-                            `<a href="Unit17Games.html" class="standard" target="_blank">Unid 17 Games (portfolio)</a>`
-                        )
-                    }
-                }
-                lines.push(GetPath() + command);
-                let handled = false
-                Object.keys(commands).forEach(c => {
-                    if(command.startsWith(c)) {
-                        command = command.substr(c.length + 1)
-                        commands[c](command)
-                        handled = true
-                    }
-                })
-                if(handled) {
-                    unhandled = 3
-                } else {
-                    
-                    switch(unhandled) {
-                        case 1:
-                            commands["help"]()
-                            break;
-                        case 2:
-                            commands["navigate"]()
-                            break;
-                            
-                        case 0:
-                        default:
-                            let program = command.split(" ")[0]
-                            lines.push("Unknown command: " + program,
-                                        "Enter 'help' for a list of commands")
-                            break;
-                    }
-                    unhandled++
-                }
-                UpdatePath()
-                lines.push(" ")
-            }
-        </script>
+        <div style="background-color: rgb(0, 51, 51);">
+            <img src="INeedAUniqueIcon.png"
+            <div id="section-1" style="text-align:left; margin-left:64px; margin-right:64px;">
+                <span class="title">[Home]</span>
+                <br />
+                <p class="standard">Sample Text</p>
+            </div>
+        </div>
 	</body>
 </html>
