@@ -6,6 +6,9 @@
             body {
                 background-color: rgb(0, 0, 0);
             }
+            hr {
+                margin-bottom:0px;
+            }
             .title {
                 font-family: "IBM Plex Mono";
                 font-size: 2em;
@@ -17,12 +20,12 @@
             }
             .standard {
                 font-family: "IBM Plex Mono";
-                font-size: 1.5em;
+                font-size: 1.2em;
                 margin-top: 0px;
                 margin-bottom: 0px;
                 color: rgb(225, 255, 225);
 
-                word-break:break-all
+                word-break:break-word
             }
 
             .gamelink {
@@ -48,7 +51,7 @@
             }
         </style>
 	</head>
-	<body>
+    <body>
         <img src="INeedAUniqueBanner.png" width="100%" />
         <div style="background-color: rgb(51, 0, 153);">
             <hr />
@@ -60,7 +63,7 @@
                         }
 
                     </script>
-                    <a class="gamelink" onclick="jumpTo(1)">[Home]</a>
+                    <a class="gamelink" onclick="jumpTo(1)">[INeedAUniqueUsername]</a>
                     <span class="gameseparator">||</span>
                     <a class="gamelink">[Transcendence Mods]</a>
                     <span class="gameseparator">||</span>
@@ -74,21 +77,40 @@
                     <span class="gameseparator">||</span>
                     <a class="gamelink">[LC-Sharp</a>
                     <span class="gameseparator">||</span>
-                    <a class="gamelink">[Quipcord]</a>
+                    <a class="gamelink">[Discord Bots]</a>
                     <span class="gameseparator">||</span>
                     <a class="gamelink">[The Mind Electronic]</a>
-
                 </div>
             </div>
             <hr />
         </div>
-        <div style="background-color: rgb(0, 51, 51);">
-            <img src="INeedAUniqueIcon.png"
-            <div id="section-1" style="text-align:left; margin-left:64px; margin-right:64px;">
-                <span class="title">[Home]</span>
+        <div style="background-color: rgb(0, 51, 51); clear:left;">
+            <img src="INeedAUniqueIcon.png" style="float:left; margin-right:64px" width="320px;" />
+            <div id="section-1" style="text-align:left; margin-right:64px;">
+                <span class="title">INeedAUniqueUsername</span>
                 <br />
-                <p class="standard">Sample Text</p>
+                <p class="standard" style="margin-top:1em;">Hello, stranger. It is me, Alex "Archcannon" Chen. I am a Computer Science major at UC Riverside. My interests include programming, writing, and drawing. I also like to make unique games. Most of the projects you see here are the result of me being bored because I have too much free time. I hope you think this username of mine is pretty unique.</p>
             </div>
         </div>
-	</body>
+        <hr style="clear:left;" />
+        <div style="background-color: rgb(0, 51, 51);
+        clear: left;">
+            <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="320px" />
+            <div id="section-1" style="text-align:left; margin-right:64px;">
+                <span class="title">Transcendence Mods</span>
+                <br />
+                <p class="standard" style="margin-top:1em;">Transcendence by George Moromisato is the premier space opera of the 2000s. And I used to make mods for it back in 2017.</p>
+            </div>
+        </div>
+        <hr style="clear:left" />
+        <div style="background-color: rgb(0, 51, 51);
+        clear: left;">
+            <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="320px" />
+            <div id="section-1" style="text-align:left; margin-right:64px;">
+                <span class="title">Transgenesis II</span>
+                <br />
+                <p class="standard" style="margin-top:1em;">Transgenesis II is a smart XML editor inspired by command line programs. Use commands to load files, navigate structures, and manage elements and attributes. The program ensures that you create valid XML for the specific domain by only allowing you to create elements and attributes specified by a schema file. Originally developed for the purpose of creating Transcendence mods. Written in C# using MonoGame and SadConsole.</p>
+            </div>
+        </div>
+    </body>
 </html>
