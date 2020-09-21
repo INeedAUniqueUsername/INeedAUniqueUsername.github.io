@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Desktop - INeedAUniqueUsername Simulator</title>
+		<title>INeedAUniqueUsername</title>
 		<style>
             body {
                 background-color: rgb(0, 0, 0);
             }
             hr {
+                margin-top:0px;
                 margin-bottom:0px;
             }
             .title {
@@ -49,14 +50,27 @@
 
                 background-color: rgb(0, 51, 51);
             }
+
+            .gamesection {
+                background-color: rgb(0, 51, 51);
+            }
+            .gamesection:hover {
+                background-color: rgb(0, 75, 75);
+            }
+
+            .sectiontext {
+                text-align: left;
+                margin-right: 64px;
+            }
+
         </style>
 	</head>
     <body>
-        <img src="INeedAUniqueBanner.png" width="100%" />
+        <img src="INeedAUniqueBanner.png" style="margin-top:0px; margin-bottom:0px; display:block; margin-left:auto; margin-right:auto;" />
         <div style="background-color: rgb(51, 0, 153);">
             <hr />
             <div style="background-color: rgb(0, 0, 51);">
-                <div class="title" style="margin-left: 16px; margin-right: 16px;">
+                <div class="standard" style="margin-left: 16px; margin-right: 16px;">
                     <script type="text/javascript">
                         function jumpTo(sectionNumber) {
                             document.getElementById('section-' + sectionNumber).scrollTo();
@@ -82,35 +96,50 @@
                     <a class="gamelink">[The Mind Electronic]</a>
                 </div>
             </div>
-            <hr />
         </div>
-        <div style="background-color: rgb(0, 51, 51); clear:left;">
-            <img src="INeedAUniqueIcon.png" style="float:left; margin-right:64px" width="320px;" />
-            <div id="section-1" style="text-align:left; margin-right:64px;">
-                <span class="title">INeedAUniqueUsername</span>
-                <br />
-                <p class="standard" style="margin-top:1em;">Hello, stranger. It is me, Alex "Archcannon" Chen. I am a Computer Science major at UC Riverside. My interests include programming, writing, and drawing. I also like to make unique games. Most of the projects you see here are the result of me being bored because I have too much free time. I hope you think this username of mine is pretty unique.</p>
+        <hr />
+        <div style="background-image:url(Tile.png); background-attachment:fixed;">
+            <div class="gamesection">
+                <img src="INeedAUniqueIcon.png" style="float:left; margin-right:64px" width="400" />
+                <div id="section-1" class="sectiontext">
+                    <p class="title" style="text-align:left;">INeedAUniqueUsername</p>
+                    <p class="standard" style="margin-top:1em;">Hello, stranger. It is me, Alex "Archcannon" Chen. I am a Computer Science major at UC Riverside. My interests include programming, writing, and drawing. I also like to make unique games. Most of the projects you see here are the result of me being bored because I have too much free time. I hope you think this username of mine is pretty unique.</p>
+                </div>
             </div>
+            <br style="clear:left;" />
         </div>
-        <hr style="clear:left;" />
-        <div style="background-color: rgb(0, 51, 51);
-        clear: left;">
-            <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="320px" />
-            <div id="section-1" style="text-align:left; margin-right:64px;">
-                <span class="title">Transcendence Mods</span>
-                <br />
-                <p class="standard" style="margin-top:1em;">Transcendence by George Moromisato is the premier space opera of the 2000s. And I used to make mods for it back in 2017.</p>
+        <hr />
+        <div>
+            <div class="gamesection">
+                <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="400" />
+                <div id="section-1" class="sectiontext">
+                    <p class="title" style="text-align:left;">Transcendence Mods</p>
+                    <p class="standard" style="margin-top:1em;">Transcendence by George Moromisato is the premier space opera of the 2000s. And I used to make mods for it back in 2017.</p>
+                </div>
             </div>
+            <br style="clear:left;" />
         </div>
-        <hr style="clear:left" />
-        <div style="background-color: rgb(0, 51, 51);
-        clear: left;">
-            <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="320px" />
-            <div id="section-1" style="text-align:left; margin-right:64px;">
-                <span class="title">Transgenesis II</span>
-                <br />
-                <p class="standard" style="margin-top:1em;">Transgenesis II is a smart XML editor inspired by command line programs. Use commands to load files, navigate structures, and manage elements and attributes. The program ensures that you create valid XML for the specific domain by only allowing you to create elements and attributes specified by a schema file. Originally developed for the purpose of creating Transcendence mods. Written in C# using MonoGame and SadConsole.</p>
+        <hr />
+        <div>
+            <div class="gamesection">
+                <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="400" />
+                <div id="section-2" class="sectiontext">
+                    <p class="title" style="text-align:left;">Transgenesis II</p>
+                    <p class="standard" style="margin-top:1em;">Transgenesis II is a smart XML editor inspired by command line programs. Use commands to load files, navigate structures, and manage elements and attributes. The program ensures that you create valid XML for the specific domain by only allowing you to create elements and attributes specified by a schema file. Originally developed for the purpose of creating Transcendence mods. Written in C# using MonoGame and SadConsole.</p>
+                </div>
             </div>
+            <br style="clear:left;" />
+        </div>
+        <hr />
+        <div style="background-image:url(BackgroundRL.png); background-attachment:fixed;">
+            <div class="gamesection">
+                <a href="TranscendenceRL.html"><img src="Sapphire.png" style="float:left; margin-right:64px" width="400" /></a>
+                <div id="section-3" class="sectiontext">
+                    <p class="title" style="text-align:left;">TranscendenceRL</p>
+                    <p class="standard" style="margin-top:1em;"></p>
+                </div>
+            </div>
+            <br style="clear:left;" />
         </div>
     </body>
 </html>
