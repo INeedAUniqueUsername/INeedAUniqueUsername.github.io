@@ -1,0 +1,69 @@
+
+body {
+    background-color: rgb(0, 0, 0);
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.title {
+    font-family: "IBM Plex Mono";
+    font-size: 2em;
+    font-variant: small-caps;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: rgb(225, 225, 255);
+    text-align: center;
+}
+
+.standard {
+    font-family: "IBM Plex Mono";
+    font-size: 1.2em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: rgb(225, 255, 225);
+    word-break: break-word
+}
+
+.gamelink, .gamelink:link, .gamelink:visited, .gamelink:focus, .gamelink:active {
+    font-family: "IBM Plex Mono";
+    font-size: 1.2em;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 75, 51);
+    white-space: nowrap;
+}
+
+    .gamelink:hover {
+        color: rgb(255, 153, 51);
+    }
+
+.gameseparator {
+    font-family: "IBM Plex Mono";
+    font-size: 1em;
+    color: rgb(225, 255, 225);
+    background-color: rgb(0, 51, 51);
+}
+
+.gamesection {
+    font-family: "IBM Plex Mono";
+    font-size: 1.2em;
+    color: rgb(225, 255, 225);
+    background-color: rgb(0, 51, 51);
+}
+
+    .gamesection:hover {
+        background-color: rgb(0, 75, 75);
+    }
+
+.sectiontext {
+    text-align: left;
+    margin-right: 64px;
+}
+
+.endsectionbr {
+    clear: left;
+}
