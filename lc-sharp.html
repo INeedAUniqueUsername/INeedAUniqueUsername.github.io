@@ -6,13 +6,25 @@
     <style>
 
 
+        .download, .download:link, .download:visited, .download:focus, .download:active {
+            font-family: "IBM Plex Mono";
+            font-size: 1em;
+            margin-left: 8px;
+            margin-right: 8px;
+            color: rgb(255, 255, 255);
+            white-space: nowrap;
+        }
+        .download:hover {
+            color: rgb(255, 153, 51);
+        }
+
         h1 {
             font-family: "IBM Plex Mono";
             font-size: 3em;
             font-variant: small-caps;
             margin-top: 0px;
             margin-bottom: 0px;
-            color: rgb(225, 225, 255);
+            color: rgb(255, 255, 255);
             text-align: center;
         }
 
@@ -21,7 +33,7 @@
             font-size: 2em;
             margin-top: 0px;
             margin-bottom: 0px;
-            color: rgba(225, 255, 225, 1);
+            color: rgba(255, 255, 255, 1);
             word-break: break-word
         }
 
@@ -30,13 +42,13 @@
             font-size: 1.2em;
             margin-top: 16px;
             margin-bottom: 0px;
-            color: rgba(225, 255, 225, 1);
+            color: rgba(255, 255, 255, 1);
             word-break: break-word;
             line-height: 32px
         }
     </style>
 </head>
-<body>
+<body style="background-color: rgb(51, 0, 153);">
     <div style="background-color: rgb(51, 0, 153);">
         <hr />
         <div style="background-color: rgb(0, 0, 51);">
@@ -66,26 +78,31 @@
         </div>
     </div>
     <hr />
-    <h1>ASECII</h1>
+    <h1>LC-Sharp</h1>
 
-    <img src="ASECII/Preview.png" style="margin-top:16px; margin-bottom:16px;" width="100%" />
+    <img src="LC-Sharp.png" style="margin-top:16px; margin-bottom:16px;" width="100%" />
     <div class="content" style="margin-left:256px; margin-right:256px;">
 
 
         <h2 style="margin-top:64px">Introduction</h2>
         <p>
-            ASECII (ASCII Sprite Editing Console II) is a fully featured ASCII art painter inspired by Aseprite and REXPaint.
+            LC-Sharp is an advanced emulator for LC-3 assembly language. It provides all the functionality of the <code>simpl</code> emulator plus more. The program is written in C# using the Terminal.Gui library by Miguel de Icaza. LC-Sharp is developed by Alex Chen and Yourui Xue with supervision by Brian Linard.
         </p>
         <h2 style="margin-top:64px">Features</h2>
-        <p>         - Brush (tile placement)
-            <br />  - Rectangle select
-            <br />  - Wand select (local / global)
-            <br />  - Freeform select (lasso / polygon)
-            <br />  - Move
-
-            <br />  - Color palette
-            <br />  - Layer management
-            <br />  - Save / load
+        <p>
+            - Instruction view provides a scrollable list of all instructions with the Program Counter highlighted
+            <br />- Register view provides a listing of all register values
+            <br />- Label view provides a listing of all defined labels in the program
+            <br />- Assembly field allows you to write code to the LC-3 on the fly.
+            <br />- Running automatically stops upon encountering a NOP
+            <br />- Internal state machine replicates that of the LC-3
+            <br />- Assembler supports custom TRAP subroutines
+        </p>
+        <h2 style="margin-top:64px">GitHub</h2>
+        <p>
+            <a class="download" href="https://github.com/3TUSK/LC-Sharp/releases/tag/v02">Download the latest release</a>
+            <br />
+            <a class="download" href="https://github.com/3TUSK/LC-Sharp">Source code and binaries are available on GitHub</a>
         </p>
     </div>
 </body>
