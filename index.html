@@ -3,6 +3,25 @@
 	<head>
 		<title>INeedAUniqueUsername</title>
         <link rel="stylesheet" href="unique.css"/>
+        <style>
+            .sectionDiv {
+                background-image: url(BackgroundRL.png);
+                background-attachment: fixed;
+            }
+            .sectionImage {
+                float: left;
+                margin-right: 64px;
+                background-color: black;
+            }
+            .sectionImage:hover{
+                outline: 4px solid white;
+            }
+            hr {
+                height: 4px;
+                background-color:white;
+                border: none;
+            }
+        </style>
 	</head>
     <body>
         <img src="INeedAUniqueBanner.png" style="margin-top:0px; margin-bottom:0px; display:block; margin-left:auto; margin-right:auto;" />
@@ -41,9 +60,9 @@
             </div>
         </div>
         <hr />
-        <div style="background-image:url(BackgroundRL.png); background-attachment:fixed;">
+        <div class="sectionDiv">
             <div class="gamesection">
-                <img src="INeedAUniqueIcon.png" style="float:left; margin-right:64px" width="400" />
+                <img src="INeedAUniqueIcon.png" class="sectionImage" width="400" />
                 <div id="section-1" class="sectiontext">
                     <p class="title" style="text-align:left;">INeedAUniqueUsername</p>
                     <p class="standard" style="margin-top:1em;">Hi, stranger. It's me, Alex "Archcannon" Chen. I am a Computer Science major at UC Riverside. My interests include programming, writing, and drawing. I also like to make weird games. Most of the projects you see here are the result of me being bored because I have too much free time. I hope you think this username of mine is pretty unique.</p>
@@ -55,9 +74,9 @@
 
 
 
-        <div style="background-image:url(BackgroundRL.png); background-attachment:fixed;">
+        <div class="sectionDiv">
             <div class="gamesection">
-                <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="400" />
+                <img src="Transcendence.jpg" class="sectionImage" width="400" />
                 <div id="section-2" class="sectiontext">
                     <p class="title" style="text-align:left;">Transcendence Mods</p>
                     <p class="standard" style="margin-top:1em;"><em>Transcendence</em> by George Moromisato is the premier space opera of the 2000s. I made some mods for it back in 2016.</p>
@@ -67,9 +86,9 @@
         </div>
         <hr />
 
-        <div style="background-image:url(BackgroundRL.png); background-attachment:fixed;">
+        <div class="sectionDiv">
             <div class="gamesection">
-                <img src="Transcendence.jpg" style="float:left; margin-right:64px" width="400" />
+                <img src="Transcendence.jpg" class="sectionImage" width="400" />
                 <div id="section-3" class="sectiontext">
                     <p class="title" style="text-align:left;">Transgenesis II</p>
                     <p class="standard" style="margin-top:1em;">Transgenesis II is a smart XML editor inspired by command line programs. Use commands to load files, navigate structures, and manage elements and attributes. The program ensures that you create valid XML for the specific domain by only allowing you to create elements and attributes specified by a schema file. Originally developed for the purpose of creating Transcendence mods. Written in C# using MonoGame and SadConsole.</p>
@@ -79,9 +98,9 @@
         </div>
         <hr />
 
-        <div style="background-image:url(BackgroundRL.png); background-attachment:fixed;">
+        <div class="sectionDiv">
             <div class="gamesection">
-                <img src="ASECII/Icon.png" style="float:left; margin-right:64px" width="400" />
+                <a href="ASECII.html"><img src="ASECII/Icon.png" class="sectionImage" width="400" /></a>
                 <div id="section-4" class="sectiontext">
                     <p class="title" style="text-align:left;">[WIP] ASECII</p>
                     <p class="standard" style="margin-top:1em;">
@@ -93,9 +112,9 @@
         </div>
         <hr />
 
-        <div style="background-image:url(BackgroundRL.png); background-attachment:fixed;">
+        <div class="sectionDiv">
             <div class="gamesection">
-                <a href="TranscendenceRL.html"><img src="Sapphire.png" style="float:left; margin-right:64px" width="400" /></a>
+                <a href="TranscendenceRL.html"><img src="Sapphire.png" class="sectionImage" width="400" /></a>
                 <div id="section-5" class="sectiontext">
                     <p class="title" style="text-align:left;">[WIP] TranscendenceRL</p>
                     <p class="standard" style="margin-top:1em;">
@@ -105,14 +124,40 @@
             </div>
             <br class="endsectionbr" />
         </div>
-
-        <div style="background-image:url(BackgroundRL.png); background-attachment:fixed;">
+        <hr />
+        <div class="sectionDiv">
             <div class="gamesection">
-                <img src="Gallery/Penumbra.gif" style="float:left; margin-right:64px; background-color:black;" width="400" />
+                <a href="gallery.html"><img src="Gallery/Penumbra.gif" class="sectionImage" width="400" /></a>
                 <div id="section-2" class="sectiontext">
                     <p class="title" style="text-align:left;">3D Ships Gallery</p>
                     <p class="standard" style="margin-top:1em;">
-                        Collection of 3D model starships that I made in 2017.
+                        Collection of 3D model starships that I made before 2020.
+                    </p>
+                </div>
+            </div>
+            <br class="endsectionbr" />
+        </div>
+        <hr />
+        <div class="sectionDiv">
+            <div class="gamesection">
+                <a href="cavex.html"><img src="CaveXHalf.png" class="sectionImage" width="400" /></a>
+                <div id="section-2" class="sectiontext">
+                    <p class="title" style="text-align:left;">CaveX</p>
+                    <p class="standard" style="margin-top:1em;">
+                        ASCII-style platformer game for Citrus Hack 2019. Control the mecha X as it descends a cave full of grenadiers. You have no attack, but you can push things around by moving!
+                    </p>
+                </div>
+            </div>
+            <br class="endsectionbr" />
+        </div>
+        <hr />
+        <div class="sectionDiv">
+            <div class="gamesection">
+                <a href="rosehack.html"><img src="RoseHack.png" class="sectionImage" width="400" /></a>
+                <div id="section-2" class="sectiontext">
+                    <p class="title" style="text-align:left;">ROSE || HACK</p>
+                    <p class="standard" style="margin-top:1em;">
+                        ASCII-style platformer game for Rose Hack 2021. Ascend the Great Rose! Plant a ROSE to climb up and HACK the enemy bugs flying around!
                     </p>
                 </div>
             </div>
