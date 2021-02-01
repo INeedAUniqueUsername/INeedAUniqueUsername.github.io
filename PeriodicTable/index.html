@@ -1,0 +1,136 @@
+<html>
+<head>
+    <title>Periodic Table of Developments</title>
+
+    <style>
+        .cell {
+            margin:0px 0px 0px 0px;
+            border-width:2px;
+            border-style:solid;
+            width:64px;
+            height:64px;
+        }
+        .symbol {
+            font-family: "IBM Plex Mono";
+            font-size: 3em;
+            font-variant: small-caps;
+            text-align: center;
+            width:100%;
+            margin: auto;
+        }
+
+        .name {
+            font-family: "IBM Plex Mono";
+            font-size: 1em;
+            text-align: center;
+        }
+
+        #periodic {
+            border-spacing: 0px 0px;
+        }
+
+        #title {
+            font-family: 'IBM Plex Mono';
+            font-size: 2em;
+            font-weight: bold;
+        }
+        #desc {
+            font-family: 'IBM Plex Mono';
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <table id="periodic" style="table-layout:fixed;">
+        
+    </table>
+
+    <div id="infobox">
+        <div id="title">%title%</div>
+        <div id="desc">%desc%</div>
+    </div>
+    <template id="templateCell">
+        <div class="cell">
+            <div class="symbol">%symbol%</div>
+            
+        </div>
+    </template>
+    <script type="text/javascript">
+        {
+            function point(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+            let entries = [{
+                    pos: new point(0, 0),
+                    symbol: "Tr",
+                    name: "TranscendenceRL",
+                desc:`TranscendenceRL is`
+                }, {
+                    pos: new point(1, 0),
+                    symbol: "Sp",
+                    name: "SpongeBot"
+                }, {
+                    pos: new point(0, 1),
+                    symbol: "Ex",
+                    name: "Example"
+                } 
+            ];
+
+            let width = 30;
+            let height = 30;
+
+            let periodic = document.getElementById('periodic');
+            for (let y = 0; y < height; y++) {
+                let row = periodic.insertRow(0);
+                for (let x = 0; x < width; x++) {
+                    row.insertCell(0);
+                }
+            }
+
+            let templateCell = document.getElementById('templateCell');
+            templateCell = templateCell.cloneNode(true);
+
+            console.log(templateCell);
+
+            let title = document.getElementById('title');
+            let desc = document.getElementById('desc');
+
+            let highlight = null;
+            function setHighlight(entry, cell) {
+                if (highlight != null) {
+                    highlight.style.backgroundColor = 'rgb(255, 255, 255';
+                }
+                cell.style.backgroundColor = 'rgb(204, 204, 204)';
+                highlight = cell;
+
+                title.innerHTML = entry.name;
+                desc.innerHTML = entry.desc;
+            }
+
+            for (let i = 0; i < entries.length; i++) {
+                let entry = entries[i];
+                console.log(entry);
+                let cell = periodic.rows[entry.pos.y].cells[entry.pos.x];
+                cell.innerHTML = templateCell.innerHTML
+                    .replace("%symbol%", entry.symbol)
+                    .replace("%name%", entry.name);
+
+                cell.onmouseover = () => setHighlight(entry, cell);
+                /*
+                cell.style.backgroundColor = back;
+
+                cell.onmouseover = function () {
+                    cell.style.backgroundColor = 'rgb(204, 204, 204)';
+                    title.innerHTML = entry.name;
+                };
+                cell.onmouseout = function () {
+                    cell.style.backgroundColor = back;
+                }
+                */
+            }
+
+        }
+    </script>
+</body>
+</html>
