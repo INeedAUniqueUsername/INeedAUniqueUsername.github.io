@@ -29,6 +29,13 @@
             border-spacing: 0px 0px;
         }
 
+        #page {
+            font-family: 'IBM Plex Mono';
+            font-size: 2em;
+            font-weight: bold;
+
+            margin-bottom:32px;
+        }
         #title {
             font-family: 'IBM Plex Mono';
             font-size: 2em;
@@ -41,6 +48,7 @@
     </style>
 </head>
 <body>
+    <div id="page">Periodic Table of Developments</div>
     <table id="periodic" style="table-layout:fixed;">
         
     </table>
@@ -61,35 +69,76 @@
                 this.x = x;
                 this.y = y;
             }
+
+            let x = 0;
+            let y = 0;
             let entries = [{
-                    pos: new point(0, 0),
-                    symbol: "Tr",
-                    name: "TranscendenceRL",
-                desc:`TranscendenceRL is`
+                    pos: new point(x = 0, y = 0),
+                    symbol: "Sn",
+                    name: "Snakebite",
+                    desc:`The original Game Maker 8.1 project - a sort of open-world snake game based on Snake. Explore the area and search for golden food while avoiding enemy snakes. Use the Tunnel ability to move under enemy snakes and the Dash ability to cross chasms and move faster for a while.`
                 }, {
-                    pos: new point(1, 0),
+                    pos: new point(x += 1, y = 0),
+                    symbol: "Jk",
+                    name: "Jake",
+                    desc: `This was my first Java project. In this game, you're a hungry snake and there are red enemy snakes that will try to bite you. Use your Tunnel ability to hide from enemy snakes and Dash ability to move faster for a while. The code was all-around terrible.`
+                }, {
+                    pos: new point(x, y += 1),
+                    symbol: "Ea",
+                    name: "Earth's Last Stand",
+                    desc: `Java project from Unit 17 of AP Computer Science A. Defend Earth from alien invaders as the last starship of the fleet.`
+                }, {
+                    pos: new point(x, y += 1),
+                    symbol: "Br",
+                    name: "Brain Waves",
+                    desc: `Minimalist greyscale ASCII roguelike for Global Game Jam 2018 - theme was Transmission. Escape from a mysterious facility by hiding in the dark and unleashing a highly destructive Brain Wave. Somewhat inspired by Firestarter. Written in Java.`
+                }, {
+                    pos: new point(x += 1, y = 0),
+                    symbol: "Sb",
+                    name: "Snakebite III",
+                    desc: `C# MonoGame rewrite of Jake with same old gameplay and much better code.`
+                }, {
+                    pos: new point(x, y += 1),
+                    symbol: "Sk",
+                    name: "SNEK",
+                    desc: "Spinoff of Snakebite III with altered gameplay. Not really a Snake game."
+                }, {
+                    pos: new point(x = 0, y = 0),
+                    symbol: "Is",
+                    name: "Island Hopper",
+                    desc: "Random project inspired by the gameplay of Dwarf Fortress, the writing of Team Fortress 2, and for some reason PlayerUnknown's Battlegrounds. Drop onto an island, defend yourself with strange weapons and try to survive."
+                }, {
+                    pos: new point(x, y += 1),
+                    symbol: "Tr",
+                    name: "TranscendenceRL: Rogue Frontier",
+                    desc: "Realtime ASCII roguelike"
+                }, {
+                    pos: new point(x += 2, y = 0),
                     symbol: "Sp",
                     name: "SpongeBot"
                 }, {
-                    pos: new point(0, 1),
-                    symbol: "Ex",
-                    name: "Example"
+                    pos: new point(x += 2, y = 0),
+                    symbol: "Io",
+                    name: "Illogical Alien Wars",
+                    desc: "A trio of ineffective Space Terminators attempt to terminate Astroknight and Western in the most illogical movie-like way possible."
                 } 
             ];
 
-            let width = 30;
-            let height = 30;
+            let width = 6;
+            let height = 6;
 
+
+            let templateCell = document.getElementById('templateCell').cloneNode(true);
             let periodic = document.getElementById('periodic');
             for (let y = 0; y < height; y++) {
                 let row = periodic.insertRow(0);
                 for (let x = 0; x < width; x++) {
-                    row.insertCell(0);
+                    let cell = row.insertCell(0);
+                    cell.innerHTML = templateCell.innerHTML
+                        .replace("%symbol%", "")
+                        .replace("%name%", "");
                 }
             }
-
-            let templateCell = document.getElementById('templateCell');
-            templateCell = templateCell.cloneNode(true);
 
             console.log(templateCell);
 
@@ -97,9 +146,13 @@
             let desc = document.getElementById('desc');
 
             let highlight = null;
+            function resetBack(cell) {
+                cell.style.backgroundColor = 'rgb(255, 255, 255';
+            }
             function setHighlight(entry, cell) {
+                
                 if (highlight != null) {
-                    highlight.style.backgroundColor = 'rgb(255, 255, 255';
+                    resetBack(highlight);
                 }
                 cell.style.backgroundColor = 'rgb(204, 204, 204)';
                 highlight = cell;
@@ -117,6 +170,11 @@
                     .replace("%name%", entry.name);
 
                 cell.onmouseover = () => setHighlight(entry, cell);
+                cell.onmouseout = () => {
+                    if (highlight == cell) {
+                        resetBack(cell);
+                    }
+                }
                 /*
                 cell.style.backgroundColor = back;
 
